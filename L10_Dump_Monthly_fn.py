@@ -114,5 +114,3 @@ def plot_fn(py_date, beer_pipe_temp_new, filler_temp_new, warm_bowl_dump_new, mo
 	ax1.get_xaxis().set_major_formatter(ticker.FuncFormatter(lambda x, p: format(int(x), ',')))
 	plt.show()
 
-
-testing

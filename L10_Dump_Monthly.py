@@ -34,7 +34,7 @@ stops_list_2 = fn.dump_fn(filler_speed, tot_mins_stop, mins_per_day)
 print("85% Completed")
 
 #plot data
-fig = fn.plot_fn(py_date, beer_pipe_temp_new, filler_temp_new, warm_bowl_dump_new, month_num, times_o_dump, stops_list_2)
+fn.plot_fn(py_date, beer_pipe_temp_new, filler_temp_new, warm_bowl_dump_new, month_num, times_o_dump, stops_list_2)
 
 # #end time
 print("100% Completed")
