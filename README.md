@@ -2,7 +2,13 @@
 
 ## About
 
-Big data project for AB's can filling line.
+Big data project for AB's can filling line. This dataset has several different parameters and each one has over 400k data points. I mainly used pandas for my workflow although using numpy could have made certains parts more efficient.
+
+## Example(s)
+
+![Example Screenshot](example.png)
+Updated:
+![Example Screenshot 2](example02.png)
 
 ## Getting Started
 
