@@ -2,7 +2,7 @@
 
 ## About
 
-Big data project for AB's can filling line. This dataset has several different parameters and each one has over 400k data points. I mainly used pandas for my workflow although using numpy could have made certains parts more efficient.
+Big data project for AB's can filling line. This dataset has several different parameters and each one has over 400k data points. I mainly used pandas for my workflow although using numpy could have made certains parts more efficient. There are many areas that could be refactored however, I am currently acquiring more data and would consider refactoring after I get it.
 
 ## Example(s)
 
@@ -55,7 +55,7 @@ You can substitute the name of the specific library with each one mentioned earl
 
 ### Set Up
 
-Run L10_Dump.py
+Run L10_Dump.py for overall results or run L_10Dump_Monthly.py for monthly results.
 
 ## Acknowledgments
 
