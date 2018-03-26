@@ -7,7 +7,7 @@ Big data project for AB's can filling line. This dataset has several different p
 ## Example(s)
 
 ![Example Screenshot](example.png)
-Updated:
+
 ![Example Screenshot 2](example02.png)
 
 ## Getting Started
