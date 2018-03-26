@@ -2,7 +2,7 @@
 
 ## About
 
-Big data project for AB's can filling line. This dataset has several different parameters and each one has over 400k data points. I mainly used pandas for my workflow although using numpy could have made certains parts more efficient. There are many areas that could be refactored however, I am currently acquiring more data and would consider refactoring after I get it.
+Big data project for AB's can filling line. I have not included the raw dataset to protect any proprietary information it might have. This dataset has several different parameters and each one has over 400k data points. I mainly used pandas for my workflow although using numpy could have made certains parts more efficient. There are many areas that could be refactored however, I am currently acquiring more data and would consider refactoring after I get it.
 
 ## Example(s)
 
