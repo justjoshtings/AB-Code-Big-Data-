@@ -100,7 +100,7 @@ def plot_fn(py_date, beer_pipe_temp_new, filler_temp_new, warm_bowl_dump_new, mo
 	plt.vlines(x=0,ymin=0, ymax=0, color='#50CD95', zorder=3, alpha=1, label = "Dumping")
 	for xc in times_o_dump: #plotting vertical lines for instances of dumping
 	    plt.vlines(x=xc,ymin=0, ymax=250, color='#50CD95', zorder=3, alpha=0.075)
-	plt.vlines(x=0,ymin=0, ymax=0, color='#FFA523', zorder=3, alpha=1, label = "Filler Stops")
+		plt.vlines(x=0,ymin=0, ymax=0, color='#FFA523', zorder=3, alpha=1, label = "Filler Stops")
 	for xc in stops_list_2: #plotting vertical lines for instances of filler stopping
 	    plt.vlines(x=xc,ymin=0, ymax=250, color='#FFA523', zorder=4, alpha=0.1)
 	ax1.scatter(py_date,beer_pipe_temp_new,s=4, c='#FB5633', marker="o", zorder=2, alpha=0.2,label='Pipe Temp.')
