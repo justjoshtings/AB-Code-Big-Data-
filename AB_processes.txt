@@ -1,0 +1,3 @@
+# Processes | Buffers
+Process Name: test1 | Processing Time: 1.0 Buffer Name: test1 | Buffering Time: 1.0 | Rate: 1.0 | Capacity: 1.0%
+Process Name: test2 | Processing Time: 1.0 Buffer Name: tet2 | Buffering Time: 1.0 | Rate: 1.0 | Capacity: 1.0%
