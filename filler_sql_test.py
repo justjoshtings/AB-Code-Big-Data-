@@ -1,6 +1,8 @@
 import sqlite3
 import pandas as pd
 from pandas import ExcelWriter
+from matplotlib import pyplot as plt
+import numpy as np
 
 conn = sqlite3.connect('filler.db') #Has table: 'filler'
 
@@ -115,6 +117,44 @@ def between_six_twelve(coords):
 	df4.to_excel(writer, sheet_name='Savings - Breakdowns')
 	writer.save()
 
+def from_six_on(coords):
+	df = pd.DataFrame(columns=['Equipment Name', 'Short Name', 'Avg. Fault Duration Per Fault', 'Count of Faults'])
+	num_of_stops_over_6 = 0
+	for i in range(len(coords)):
+		avg_fault_duration = coords[i][2]/coords[i][3]
+		if avg_fault_duration >= 6:
+			num_of_stops_over_6 += coords[i][3]
+		df.loc[i] = [coords[i][0], coords[i][1], avg_fault_duration, coords[i][3]]
+	df_sorted_by_duration = df.sort_values(by=['Avg. Fault Duration Per Fault'])
+	
+	num_of_stoppages_over_lst = []
+	for i in range(6, 470): #470 minutes
+		percentage_done =((i-6)/(470-6))*100
+		print("{:.1f}% Done".format(percentage_done))
+		xtime = i
+		num_stoppages_over_xtime = 0
+		for j in range(df_sorted_by_duration.shape[0]):
+			if df_sorted_by_duration.loc[j][2] >= xtime:
+				num_stoppages_over_xtime += df_sorted_by_duration.loc[j][3]
+		num_of_stoppages_over_lst.append(num_stoppages_over_xtime)
+	num_of_stoppages_over_lst_new = []
+	for i in range(len(num_of_stoppages_over_lst)):
+		temp_insert = (1 - (num_of_stoppages_over_lst[i]/num_of_stops_over_6))*100
+		num_of_stoppages_over_lst_new.append(temp_insert)
+	x_axis = np.arange(6,470,1)
+	
+	plt.figure(figsize=(10,7))
+	plt.plot(x_axis, num_of_stoppages_over_lst_new, 'r--', markersize=8)
+	# plt.xlim(6, 24)
+	plt.yticks(np.arange(min(num_of_stoppages_over_lst_new), max(num_of_stoppages_over_lst_new)+10, 10))
+	# plt.xticks(np.arange(min(x_axis), 26, 2))
+	plt.xscale('log')
+	plt.grid(True)
+	plt.ylabel('Percentage of Avg. Number of Faults (%)')
+	plt.xlabel('Breakdown Duration (Mins)')
+	plt.title('Percentage of Faults Over Breakdown Duration (Log-Scale)')
+	plt.show()			
+
 def test(coords):
 	df = pd.DataFrame(columns=['Equipment Name', 'Short Name', 'Avg. Fault Duration Per Fault', 'Count of Faults'])
 	for i in range(len(coords)):
@@ -124,7 +164,8 @@ def test(coords):
 	writer.save()
 
 
-between_six_twelve(coords)
+# between_six_twelve(coords)
 # test(coords)
+from_six_on(coords)
 
 conn.close()
