@@ -122,11 +122,13 @@ def from_six_on(coords):
 	num_of_stops_over_6 = 0
 	for i in range(len(coords)):
 		avg_fault_duration = coords[i][2]/coords[i][3]
-		if avg_fault_duration >= 6:
+		if avg_fault_duration >= 0:
 			num_of_stops_over_6 += coords[i][3]
 		df.loc[i] = [coords[i][0], coords[i][1], avg_fault_duration, coords[i][3]]
 	df_sorted_by_duration = df.sort_values(by=['Avg. Fault Duration Per Fault'])
-	
+	print(df['Count of Faults'].sum())
+
+
 	num_of_stoppages_over_lst = []
 	for i in range(6, 470): #470 minutes
 		percentage_done =((i-6)/(470-6))*100
@@ -142,9 +144,6 @@ def from_six_on(coords):
 		temp_insert = (1 - (num_of_stoppages_over_lst[i]/num_of_stops_over_6))*100
 		num_of_stoppages_over_lst_new.append(temp_insert)
 	x_axis = np.arange(6,470,1)
-	# print(num_of_stops_over_6)
-	print(num_of_stoppages_over_lst)
-	print(len(num_of_stoppages_over_lst))
 	plt.figure(figsize=(10,7))
 	plt.plot(x_axis, num_of_stoppages_over_lst_new, 'r--', markersize=8)
 	plt.xlim(6, 24)
@@ -157,17 +156,63 @@ def from_six_on(coords):
 	plt.title('Percentage of Faults Over Breakdown Duration (Log-Scale)')
 	plt.show()			
 
-def test(coords):
-	df = pd.DataFrame(columns=['Equipment Name', 'Short Name', 'Avg. Fault Duration Per Fault', 'Count of Faults'])
-	for i in range(len(coords)):
-		df.loc[i] = [coords[i][0], coords[i][1], coords[i][2], coords[i][3]]
-	writer = ExcelWriter('Test.xlsx')
-	df.to_excel(writer, sheet_name='Processes Between 6mins and 12.5mins')
-	writer.save()
+
+def from_six_on_classify_faults(coords):
+	df_6_13 = pd.DataFrame(columns=['Equipment Name', 'Short Name', 'Avg. Fault Duration Per Fault', 'Count of Faults'])
+
+	index_label = 0
+	total_faults_6_13 = 0
+	for i in range(len(coords)): #Narrow data into 6 - 13 mins and insert into data frame
+		avg_fault_duration = coords[i][2]/coords[i][3]
+		if avg_fault_duration >= 6 and avg_fault_duration <= 13:
+			df_6_13.loc[index_label] = [coords[i][0], coords[i][1], avg_fault_duration, coords[i][3]]
+			index_label += 1
+			total_faults_6_13 += coords[i][3]
+
+	fault_dict = {df_6_13.loc[0][1]:0}
+	for i in range(df_6_13.shape[0]):
+		fault_dict.update({df_6_13.loc[i][1]:0})
+
+	key_values = []
+	for key, value in fault_dict.items():
+		key_values.append(key)
+
+	for i in range(df_6_13.shape[0]):
+		for j in range(len(key_values)):
+			if df_6_13.loc[i][1] == key_values[j]:
+				fault_dict[key_values[j]] += df_6_13.loc[i][3]
+	# print(fault_dict)
+	# # print(sum(fault_dict.values()))
+	# print(total_faults_6_13)
+	faults_distribution_lst = []	
+	for key, value in fault_dict.items():
+		faults_distribution_lst.append((value/total_faults_6_13)*100)
+
+	X = np.arange(len(key_values))
+	fig, ax = plt.subplots()
+	barlist = ax.bar(X, faults_distribution_lst, align='center', color='seagreen')
+	ax.set_xticklabels(key_values)
+	ax.set_xticks(X)
+	plt.xticks(rotation='65')
+	ax.tick_params(axis = 'x', which = 'major', labelsize = 8)
+	# plt.ylim(0,570000)
+	# plt.grid(True)
+	plt.ylabel('Percentage of Total Faults Instances (%)')
+	plt.title('Distribution of Breakdown Instances to Processes with Breakdown Durations Between 6-13 mins')
+
+	for i in range(len(faults_distribution_lst)):
+			v = faults_distribution_lst[i]+1
+			ax.text(i-0.4, v, "{:,.1f}%".format(faults_distribution_lst[i]), color='black', va='center', fontweight='bold', fontsize=9)
+	ax.text(16, 25, "Total Number of Faults\nBetween 6-13 mins: {:,.0f}".format(total_faults_6_13, color='black', va='center', fontweight='5', fontsize=12))
+	ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda X, loc: "{:,}".format(int(X))))
+
+	plt.show()
 
 
+
+# from_six_on_classify_faults(coords)
 # between_six_twelve(coords)
 # test(coords)
-from_six_on(coords)
+# from_six_on(coords)
 
 conn.close()

@@ -51,22 +51,8 @@ def bar_plot(total_cans_shift_lst):
 
 	X = [1, 2, 3]
 	
-	# plt.figure(figsize=(8,6))
-	# plt.bar(X, avg_shift_output, align='center')
-	# plt.xlabel('Shift #')
-	# plt.xticks(X, ('Shift 1', 'Shift 2', 'Shift 3'))
-	# plt.ylabel('Average Output (# of Cans)')
-	# plt.title('Average Output per Shift')
-
-	# plt.figure(figsize=(8,6))
-	# plt.bar(X, total_shift_output, align='center')
-	# plt.xlabel('Shift #')
-	# plt.xticks(X, ('Shift 1', 'Shift 2', 'Shift 3'))
-	# plt.ylabel('Total Output (# of Cans)')
-	# plt.title('Total Output per Shift')
-	
-	total_shift_output = [3102423, 3687984, 2623086]
-	avg_shift_output = [443203, 526855, 437181]
+	total_shift_output = [2525553, 3089514, 2623086]
+	avg_shift_output = [420926, 514919, 437181]
 	percentage_of_total_output = []
 	for i in range(3):
 		percentage_of_total_output.append((total_shift_output[i]/sum(total_shift_output))*100)
@@ -74,44 +60,36 @@ def bar_plot(total_cans_shift_lst):
 	X = [1, 2, 3]
 	X_labels = ['Shift 1', 'Shift 2', 'Shift 3']
 
-	# fig, ax = plt.subplots()
-	# ax.bar(X, avg_shift_output, align='center')
-	# ax.set_xticklabels(X_labels)
-	# ax.set_xticks(X)
-	# plt.xlabel('Shift #')
-	# # plt.ylim(0,55)
-	# plt.grid(True)
-	# plt.ylabel('Average Output (# of Cans)')
-	# plt.title('Average Output per Shift')
-	# ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda X, loc: "{:,}".format(int(X))))
+	fig, ax = plt.subplots()
+	ax.bar(X, avg_shift_output, align='center')
+	ax.set_xticklabels(X_labels)
+	ax.set_xticks(X)
+	plt.xlabel('Shift #')
+	# plt.ylim(0,55)
+	plt.grid(True)
+	plt.ylabel('Average Output (# of Cans)')
+	plt.title('Average Output per Shift')
+	ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda X, loc: "{:,}".format(int(X))))
 
-	# for i in range(3):
-	# 	v = avg_shift_output[i]+3000
-	# 	ax.text(i+.9, v, "{:,.0f}".format(avg_shift_output[i]), color='black', va='center', fontweight='bold', fontsize=10)
+	for i in range(3):
+		v = avg_shift_output[i]+3000
+		ax.text(i+.9, v, "{:,.0f}".format(avg_shift_output[i]), color='black', va='center', fontweight='bold', fontsize=10)
 	
-	# plt.figure(figsize=(8,6))
-	# plt.bar(X, percentage_of_total_output, align='center')
-	# plt.xlabel('Shift #')
-	# plt.xticks(X, ('Shift 1', 'Shift 2', 'Shift 3'))
-	# plt.ylabel('Percentage of Total Output (%)')
-	# plt.title('Output Distribution Per Shift')	
+	fig, ax = plt.subplots()
+	ax.bar(X, total_shift_output, align='center')
+	ax.set_xticklabels(X_labels)
+	ax.set_xticks(X)
+	plt.xlabel('Shift #')
+	# plt.ylim(0,55)
+	plt.grid(True)
+	plt.ylabel('Total Output (# of Cans)')
+	plt.title('Total Output per Shift')
 
-
-	# fig, ax = plt.subplots()
-	# ax.bar(X, total_shift_output, align='center')
-	# ax.set_xticklabels(X_labels)
-	# ax.set_xticks(X)
-	# plt.xlabel('Shift #')
-	# # plt.ylim(0,55)
-	# plt.grid(True)
-	# plt.ylabel('Total Output (# of Cans)')
-	# plt.title('Total Output per Shift')
-
-	# for i in range(3):
-	# 	v = total_shift_output[i]+60000
-	# 	ax.text(i+.9, v, "{:,.0f}".format(total_shift_output[i]), color='black', va='center', fontweight='bold', fontsize=10)
+	for i in range(3):
+		v = total_shift_output[i]+60000
+		ax.text(i+.9, v, "{:,.0f}".format(total_shift_output[i]), color='black', va='center', fontweight='bold', fontsize=10)
 	
-	# ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda X, loc: "{:,}".format(int(X))))
+	ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda X, loc: "{:,}".format(int(X))))
 
 	fig, ax = plt.subplots()
 	ax.bar(X, percentage_of_total_output, align='center')
@@ -150,7 +128,7 @@ def speed_graphs(shift_speed_data):
 
 	X = [1, 2, 3]
 	X_labels = ['Shift 1', 'Shift 2', 'Shift 3']
-	shift_speed_lst = [53.53, 63.63, 52.80]
+	shift_speed_lst = [50.84, 62.19, 52.80]
 
 	fig, ax = plt.subplots()
 	ax.bar(X, shift_speed_lst, align='center')
@@ -168,7 +146,7 @@ def speed_graphs(shift_speed_data):
 
 	plt.show()
 
-# speed_graphs(shift_speed_data)
+speed_graphs(shift_speed_data)
 
 
 
