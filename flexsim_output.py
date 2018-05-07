@@ -176,7 +176,8 @@ def plot(distribution_faults_df):
 	plt.xlabel(labels[0])
 	plt.ylabel(labels[1])
 	plt.title('Percentage of Faults Over Breakdown Duration')
-	plt.xlim(6, 31)
+	plt.ylim(0, 75)
+	plt.xlim(6, 30)
 	plt.yticks(np.arange(0, 80, 10))
 	plt.xticks(np.arange(6, 32, 2))
 	# plt.text(7.5, at_13+7, 'Percentage of Faults\nUnder 13 Mins:\n{:.1f}%'.format(at_13), fontsize=13)
@@ -186,7 +187,7 @@ def plot(distribution_faults_df):
 
 	plt.show()
 
-# plot(distribution_faults_df)
+plot(distribution_faults_df)
 
 def bar_plot2(sum_at_filler_df, loop_num):
 	X = []
@@ -298,8 +299,8 @@ def bar_plot2(sum_at_filler_df, loop_num):
 
 	plt.show()
 
-bar_plt_lst = [sum_at_filler_df, sum_at_filler_df2, sum_at_filler_df3, sum_at_filler_df4]
-for i in range(len(bar_plt_lst)):
-	bar_plot2(bar_plt_lst[i], i)
+# bar_plt_lst = [sum_at_filler_df, sum_at_filler_df2, sum_at_filler_df3, sum_at_filler_df4]
+# for i in range(len(bar_plt_lst)):
+# 	bar_plot2(bar_plt_lst[i], i)
 
 
